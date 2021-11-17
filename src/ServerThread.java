@@ -72,7 +72,6 @@ public class ServerThread extends Thread {
     public void run() {
         System.out.println("Thread started");
         Scanner in;
-
         PrintWriter out;
         try {
             in = new Scanner(socket.getInputStream());

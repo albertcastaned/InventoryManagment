@@ -17,7 +17,7 @@ public class ClientGUI {
 
 
     public void init(Record[] records) {
-        frame = new JFrame("Inventario - Cliente");
+        frame = new JFrame("Inventory - Client");
 
         DefaultTableModel model = getTableModel(records);
         table = new JTable(model);

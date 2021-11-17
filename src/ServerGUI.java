@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 public class ServerGUI {
     private JTable table;
     private JList logs;
-    private final String[] columnNames = { "Nombre", "Precio", "Cantidad", "Quantity to add", "" };
+    private final String[] columnNames = { "Nombre", "Precio", "Quantity", "Quantity to add", "" };
     public JFrame frame;
     private Action order;
     private final Server server;

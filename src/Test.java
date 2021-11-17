@@ -28,7 +28,7 @@ class TestClient extends BaseClient {
                 int randomID = (int) ((Math.random() * (4)));
                 int randomQuantity = (int) ((Math.random() * (2 - 1)) + 1);
 
-                System.out.println("Ordering " + randomID + " quantity " + randomQuantity);
+                System.out.println("Ordering ID: " + randomID + " quantity " + randomQuantity);
                 orderRecord(randomID, randomQuantity);
                 String response = in.nextLine();
                 processResponse(response);
@@ -65,6 +65,7 @@ class TestServer extends BaseServer {
         for(Record record : records){
             System.out.println(record.item.name + " - " + record.quantity);
         }
+        System.out.println("\n");
         if(inventory.getRecord(id).quantity < 0) {
             System.out.println("CONCURRENCY ERROR");
             System.exit(1);
@@ -96,12 +97,16 @@ class TestServerAdderThread extends Thread {
         while (true) {
             if (server.inventory == null) continue;
              int randomID = (int) ((Math.random() * (3)));
-            int randomQuantity = (int) ((Math.random() * (5 - 1)) + 1);
-            System.out.println("Adding product " + randomID + " Quantity " + randomQuantity);
+            int randomQuantity = (int) ((Math.random() * (30 - 10)) + 10);
+            System.out.println("Adding product ID: " + randomID + " Quantity " + randomQuantity);
 
             server.inventory.addRecord(randomID, randomQuantity);
+            for(Record record : server.getRecords()){
+                System.out.println(record.item.name + " - " + record.quantity);
+            }
+            System.out.println("\n");
             try {
-                this.sleep((int) ((Math.random() * (5000 - 1000)) + 1000));
+                this.sleep((int) ((Math.random() * (3000 - 500)) + 500));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -113,7 +118,7 @@ public class Test {
     public static void main(String[] args)  {
         ArrayList<TestClientThread> clientThreads = new ArrayList();
         TestServerThread serverThread = new TestServerThread();
-        int clientThreadsNum = 50;
+        int clientThreadsNum = 30;
 
         serverThread.start();
 
